@@ -7,8 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.account.entities.AccountEntity;
+import com.account.jmslistener.JMSListener;
 import com.account.repo.AccountMongoRepo;
+import com.qa.example.entities.AccountEntity;
 
 @SpringBootApplication
 public class AccountMongoApplication implements CommandLineRunner{
@@ -22,15 +23,7 @@ public class AccountMongoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		repository.deleteAll();
-		repository.save(new AccountEntity("Joe", "Schmidt","b123456"));
-		repository.save(new AccountEntity("Jordan", "Goldman","a654321"));
-		for(AccountEntity entity : repository.findAll()) {
-			System.out.println(entity);
-		}
-		
-		
+	
 	}
 
 }

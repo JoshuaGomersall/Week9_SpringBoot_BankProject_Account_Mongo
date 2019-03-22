@@ -1,15 +1,20 @@
 package com.account.jmslistener;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
-import com.account.entities.AccountEntity;
+import com.account.repo.AccountMongoRepo;
+import com.qa.example.entities.AccountEntity;
+
 @Component
 public class JMSListener {
-	/*
-	@JmsListener(destination = "valentineisaweapon", containerFactory = "myFactory")
-    public void receiveMessage(AccountEntity entity) {
-        System.out.println("Received <" + entity + ">");
-    }
-    */
+
+	@Autowired
+	private AccountMongoRepo repository;
+
+	@JmsListener(destination = "Account List", containerFactory = "myFactory")
+	public void receiveMessage(AccountEntity entity) {
+		repository.save(entity);
+	}
 }
